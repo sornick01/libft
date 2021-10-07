@@ -1,4 +1,4 @@
-#include "libc_funcs.h"
+#include "libft.h"
 
 int	ft_isdigit(int c)
 {

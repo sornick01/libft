@@ -1,13 +1,15 @@
-#include "libc_funcs.h"
+#include "libft.h"
 
 char	*ft_strjoin(char const *s1, const char *s2)
 {
 	char	*str;
-	size_t	len;
+	size_t	str_len;
 	size_t	i;
 
-	len = ft_strlen(s1) + ft_strlen(s2);
-	str = (char *)malloc(sizeof(char) * (len + 1));
+	if (!s1 || !s2)
+		return ("");
+	str_len = ft_strlen(s1) + ft_strlen(s2);
+	str = (char *)malloc(sizeof(char) * (str_len + 1));
 	if (str == NULL)
 		return (NULL);
 	i = 0;
@@ -24,5 +26,5 @@ char	*ft_strjoin(char const *s1, const char *s2)
 		i++;
 	}
 	str[i] = '\0';
-	
+	return (str);
 }

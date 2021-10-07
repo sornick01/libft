@@ -1,4 +1,4 @@
-#include "libc_funcs.h"
+#include "libft.h"
 
 static size_t	min(size_t a, size_t b)
 {

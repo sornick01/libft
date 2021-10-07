@@ -1,27 +1,34 @@
-#include "libc_funcs.h"
+#include "libft.h"
+#include <unistd.h>
 
-void	test()
+static void		ft_print_result(char const *s)
 {
-	char	buf1[25565] = "hello dimasik";
-	char	str1[25565] = "nu zdarova";
-	char	buf2[25565] = "hello dimasik";
-	char	str2[25565] = "nu zdarova";
+	int		len;
 
-	printf("%d %s\n", ft_strlcpy(buf1, str1, 2), buf1);
-	printf("%d %s\n", strlcpy(buf2, str2, 2), buf2);
-	// printf("%d %s\n", ft_strlcat(buf1, str1, sizeof(buf1)), buf1);
-	// printf("%d %s\n", strlcat(buf2, str2, sizeof(buf2)), buf2);
+	len = 0;
+	while (s[len])
+		len++;
+	write(1, s, len);
 }
 
-void tst_substr()
+static void		check_strtrim(char *s1, char *set)
 {
-	char str[] = "requires further verification because we did not recognize";
-	char *sub = ft_substr(str, 9, 124);
-	printf("%s", sub);
+	char	*strtrim;
+
+	if (!(strtrim = ft_strtrim(s1, set)))
+		ft_print_result("NULL");
+	else
+		ft_print_result(strtrim);
+	if (strtrim == s1)
+		ft_print_result("\nA new string was not returned");
+	else
+		free(strtrim);
 }
 
 int	main(void)
 {
-	test();
-	//tst_substr();
+	char set[] = "\t \n";
+	char s1[] = "lorem \n ipsum \t dolor \n sit \t amet";
+
+	check_strtrim(s1, set);
 }
