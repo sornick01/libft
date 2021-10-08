@@ -1,34 +1,19 @@
 #include "libft.h"
 #include <unistd.h>
 
-static void		ft_print_result(char const *s)
-{
-	int		len;
 
-	len = 0;
-	while (s[len])
-		len++;
-	write(1, s, len);
-}
-
-static void		check_strtrim(char *s1, char *set)
-{
-	char	*strtrim;
-
-	if (!(strtrim = ft_strtrim(s1, set)))
-		ft_print_result("NULL");
-	else
-		ft_print_result(strtrim);
-	if (strtrim == s1)
-		ft_print_result("\nA new string was not returned");
-	else
-		free(strtrim);
-}
 
 int	main(void)
 {
-	char set[] = "\t \n";
-	char s1[] = "lorem \n ipsum \t dolor \n sit \t amet";
-
-	check_strtrim(s1, set);
+	int i = 0;
+	char *str  = NULL;
+	// char	str[] = "a bbcbabcdima niggerbbaacbac ";
+	// char *sub = ft_strtrim(str, " abc");
+	char **tab = ft_split("         ", ' ');
+	// char **tab = ft_split(str, ',');
+// 	while (tab[i] != NULL)
+// 	{
+// 		printf("%s\n", tab[i]);
+// 		i++;
+// 	}
 }
