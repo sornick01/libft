@@ -2,7 +2,7 @@
 
 static size_t	min(size_t a, size_t b)
 {
-	if (a > b)
+	if (a < b)
 		return (a);
 	return (b);
 }
@@ -13,11 +13,11 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	size_t	i;
 	size_t	s_len;
 
-	s_len = ft_strlen(s);
 	if (s == NULL)
 		return (NULL);
+	s_len = ft_strlen(s);
 	if (start > s_len)
-		return ("");
+		return (ft_strdup(""));
 	sub_s = (char *)malloc(sizeof(char) * (min(s_len - start, len) + 1));
 	if (sub_s == NULL)
 		return (NULL);

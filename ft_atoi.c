@@ -26,10 +26,13 @@ int	ft_atoi(const char *str)
 		str++;
 	while (ft_isdigit(*str))
 	{
-		res = res * 10 + (*str - '0');
+		res = res * 10 + (*str++ - '0');
 		if (res < 0)
-			return (0);
-		str++;
+		{
+			if (sign == -1)
+				return (0);
+			return (-1);
+		}
 	}
 	return ((int)(res * sign));
 }

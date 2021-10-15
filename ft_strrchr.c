@@ -7,11 +7,11 @@ char	*ft_strrchr(const char *s, int c)
 	s_last = NULL;
 	while (*s != '\0')
 	{
-		if (*s == c)
+		if ((unsigned char)*s == (unsigned char)c)
 			s_last = (char *)s;
 		s++;
 	}
-	if (*s == c)
+	if ((unsigned char)*s == (unsigned char)c)
 		s_last = (char *)s;
 	return (s_last);
 }

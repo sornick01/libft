@@ -23,61 +23,48 @@ static char	*get_word(const char **s, char c)
 {
 	char	*word;
 	size_t	i;
-	size_t	len;
 
 	i = 0;
 	while ((*s)[i] != '\0' && (*s)[i] != c)
 		i++;
-	word = (char *)malloc(sizeof(char) * (i + 1));
+	word = ft_substr(*s, 0, i);
 	if (!word)
 		return (NULL);
-	len = i;
-	i = 0;
-	while (**s && i < len)
-	{
-		word[i] = **s;
-		(*s)++;
-		i++;
-	}
-	word[i] = '\0';
+	(*s) = (*s) + i + 1;
 	return (word);
 }
 
-char	**alloc_mem(char const *s, char c)
+static void	*free_mem(char ***tab, size_t	i)
 {
-	char	**tab;
-	size_t	words;
-
-	words = count_words(s, c);
-	if (!words)
-		return (NULL);
-	tab = (char **)ft_calloc((words + 1), sizeof(char *));
-	return (tab);
+	while (i >= 0)
+	{
+		free((*tab)[i]);
+		i--;
+	}
+	free(*tab);
+	return (NULL);
 }
 
 char	**ft_split(char const *s, char c)
 {
 	char	**tab;
+	size_t	words;
 	size_t	i;
 
 	if (!s)
 		return (NULL);
-	// tab = (char **)malloc(sizeof(char *) * (count_words(s, c) + 1));
-	tab = alloc_mem(s, c);
+	words = count_words(s, c);
+	tab = (char **)ft_calloc((words + 1), sizeof(char *));
 	if (!tab)
 		return (NULL);
 	i = 0;
-	while (*s != '\0')
+	while (*s != '\0' && i < words)
 	{
 		if (*s != c)
 		{
 			tab[i] = get_word(&s, c);
-			if (!tab[i])
-			{
-				//free_tab(tab, i);
-				return (NULL);
-			}
-			i++;
+			if (!tab[i++])
+				return (free_mem(&tab, i - 1));
 		}
 		else
 			s++;
